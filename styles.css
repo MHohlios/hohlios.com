@@ -61,7 +61,7 @@ h1 { font-family: 'Space Grotesk', sans-serif; font-size: 56px; font-weight: 700
 
 /* — numbered rows — */
 .row { display: grid; grid-template-columns: 200px minmax(0,1fr); }
-.row-label { padding: 24px 32px; border-right: 1px solid var(--line); font-size: 11px; letter-spacing: 0.1em; color: var(--accent); }
+.row-label { padding: 24px 32px; border-right: 1px solid var(--line); font-size: 11px; letter-spacing: 0.1em; color: var(--accent); text-transform: uppercase; }
 .meta { font-size: 10px; letter-spacing: 0.08em; color: var(--muted); }
 h3 { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; }
 h3 .mono { font-size: 10.5px; font-weight: 400; }
@@ -131,28 +131,71 @@ h2 { font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 700
 .email:hover { color: var(--accent); opacity: 1; }
 .contact .links { font-size: 11px; letter-spacing: 0.08em; gap: 24px; }
 
-/* — responsive — */
-@media (max-width: 900px) {
-  .nav { grid-template-columns: minmax(0,1fr) auto; gap: 16px; height: auto; padding: 14px 20px; }
-  .nav-links { grid-column: 1 / -1; gap: 18px; }
-  .hero, .row, .oss, .toolkit { grid-template-columns: minmax(0,1fr); }
-  .hero-copy, .oss-main, .kit, .row-label, .card { border-right: 0; }
-  .hero-copy { padding: 40px 20px 32px; }
-  h1 { font-size: 40px; }
-  .hero-side { grid-template-rows: auto auto; border-top: 1px solid var(--line); }
-  .portrait { max-height: 420px; object-position: top; }
-  .row-label { padding: 20px; border-bottom: 1px solid var(--line); }
+/* — mobile (≤760px) — single column, portrait strip, heading bands — */
+@media (max-width: 760px) {
+  /* nav: brand + toggle on top bar, links on a second row */
+  .nav { display: flex; flex-wrap: wrap; gap: 0; height: auto; padding: 0; }
+  .brand { padding: 0 20px; line-height: 52px; }
+  .theme-toggle { margin-left: auto; padding-right: 20px; }
+  .nav-links { order: 3; width: 100%; gap: 20px; padding: 12px 20px; border-top: 1px solid var(--line); font-size: 10.5px; overflow-x: auto; white-space: nowrap; }
+  .nav-links a { padding: 8px 0; }
+
+  /* hero: text first, then a compact portrait strip */
+  .hero { grid-template-columns: minmax(0,1fr); }
+  .hero-copy { padding: 36px 20px 32px; gap: 16px; border-right: 0; }
+  h1 { font-size: 34px; letter-spacing: -0.03em; line-height: 1.06; }
+  .eyebrow { font-size: 10px; }
+  .lede { font-size: 14px; line-height: 1.7; }
+  .hero-side { grid-template-rows: none; grid-template-columns: 42% minmax(0,1fr); align-items: center; border-top: 1px solid var(--line); }
+  .portrait { width: 100%; height: auto; min-height: 0; aspect-ratio: 47 / 60; border-right: 1px solid var(--line); }
+  .hero-facts { border-top: 0; padding: 16px 18px; gap: 7px; font-size: 10px; letter-spacing: 0.05em; }
+
+  /* section label rail → heading band */
+  .row, .toolkit { grid-template-columns: minmax(0,1fr); }
+  .row-label { display: flex; align-items: baseline; gap: 12px; padding: 22px 20px 14px; border-right: 0; border-bottom: 1px solid var(--line); background: var(--card); text-transform: none; }
   .row-label br { display: none; }
-  .row-label .muted { margin-left: 10px; }
-  .cards, .oss-more, .apps { grid-template-columns: minmax(0,1fr); }
-  .card + .card, .kit + .kit { border-top: 1px solid var(--line); }
-  .oss-item + .oss-item, .app + .app { border-left: 0; border-top: 1px solid var(--line); }
-  .ansi { border-top: 1px solid var(--line); }
-  .job { grid-template-columns: minmax(0,1fr) auto; gap: 4px 16px; padding: 16px 20px; }
-  .job > :first-child { grid-column: 1; }
+  .row-label .muted { font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 700; letter-spacing: -0.02em; color: var(--fg); }
+
+  /* work cards stack */
+  .cards { grid-template-columns: minmax(0,1fr); }
+  .card { border-right: 0; }
+  .card + .card { border-top: 1px solid var(--line); }
+  .card img { height: auto; aspect-ratio: 2 / 1; object-position: center; }
+  .card-body { padding: 16px 20px; gap: 5px; }
+  .card-body p { line-height: 1.6; }
+
+  /* career: company | tag, then role | years */
+  .job { grid-template-columns: minmax(0,1fr) auto; gap: 4px 16px; padding: 14px 20px; }
+  .co { grid-column: 1; grid-row: 1; }
   .job .tag { grid-column: 2; grid-row: 1; }
-  .co { grid-column: 1; }
-  .job .muted:not(.mono) { grid-column: 1 / -1; }
-  .vyttle-head, .app, .kit, .contact { padding-left: 20px; padding-right: 20px; }
-  .email { font-size: 26px; }
+  .job .muted:not(.mono) { grid-column: 1; grid-row: 2; font-size: 12.5px; }
+  .job > .mono.muted { grid-column: 2; grid-row: 2; font-size: 10.5px; text-align: right; }
+
+  /* open source: single column, ANSI legend dropped */
+  .oss, .oss-more { grid-template-columns: minmax(0,1fr); }
+  .oss-main { padding: 24px 20px; border-right: 0; }
+  h2 { font-size: 22px; }
+  .chips { font-size: 10px; }
+  .ansi { display: none; }
+  .oss-item { padding: 16px 20px; }
+  .oss-item + .oss-item { border-left: 0; border-top: 1px solid var(--line); }
+
+  /* special projects */
+  .vyttle-head { padding: 20px; gap: 12px; }
+  .vyttle-head > a { margin-left: auto; }
+  .vyttle-head p { order: 4; flex-basis: 100%; min-width: 0; }
+  .apps { grid-template-columns: minmax(0,1fr); }
+  .app { padding: 18px 20px; }
+  .app + .app { border-left: 0; border-top: 1px solid var(--line); }
+  .btn { padding: 8px 12px; }
+
+  /* toolkit stacks */
+  .kit { padding: 16px 20px; border-right: 0; line-height: 1.85; }
+  .kit + .kit { border-top: 1px solid var(--line); }
+
+  /* contact */
+  .contact { padding: 36px 20px 40px; }
+  .email { font-size: 22px; overflow-wrap: anywhere; }
+  .contact .links { gap: 10px 20px; }
+  .contact .links .muted { flex-basis: 100%; font-size: 10px; }
 }
