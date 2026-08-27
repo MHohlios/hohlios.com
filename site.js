@@ -6,20 +6,23 @@
   function applyTheme(theme) {
     root.dataset.theme = theme;
     label.textContent = theme === 'sky' ? 'celadon-sky' : 'celadon';
-    try { localStorage.setItem('theme', theme); } catch (e) {}
   }
 
   applyTheme(root.dataset.theme || 'celadon');
   document.getElementById('theme-toggle').addEventListener('click', () => {
-    applyTheme(root.dataset.theme === 'sky' ? 'celadon' : 'sky');
+    const theme = root.dataset.theme === 'sky' ? 'celadon' : 'sky';
+    applyTheme(theme);
+    try { localStorage.setItem('theme', theme); } catch (e) {}
   });
 
   const copy = document.getElementById('copy-email');
   const address = document.querySelector('.email').textContent;
   const idleLabel = copy.textContent;
+  let resetTimer;
   copy.addEventListener('click', async () => {
     try { await navigator.clipboard.writeText(address); } catch (e) { return; }
     copy.textContent = 'COPIED ✓';
-    setTimeout(() => { copy.textContent = idleLabel; }, 1600);
+    clearTimeout(resetTimer);
+    resetTimer = setTimeout(() => { copy.textContent = idleLabel; }, 1600);
   });
 })();
