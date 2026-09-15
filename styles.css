@@ -134,7 +134,7 @@ h2 { font-family: var(--font-display); font-size: 24px; font-weight: 700; letter
 .contact .links { font-size: 11px; letter-spacing: 0.08em; gap: 24px; }
 
 /* — mobile (≤760px) — single column, portrait strip, heading bands — */
-@media (max-width: 760px) {
+@media screen and (max-width: 760px) {
   /* nav: brand + toggle on top bar, links on a second row */
   .nav { display: flex; flex-wrap: wrap; gap: 0; height: auto; padding: 0; }
   .brand { padding: 0 20px; line-height: 52px; }
@@ -200,4 +200,80 @@ h2 { font-family: var(--font-display); font-size: 24px; font-weight: 700; letter
   .email { font-size: 22px; overflow-wrap: anywhere; }
   .contact .links { gap: 10px 20px; }
   .contact .links .muted { flex-basis: 100%; font-size: 10px; }
+}
+
+/* — print — two pages, with paper sizing left to the print dialog — */
+@page { margin: 12mm; }
+
+@media print {
+  :root, [data-theme="celadon"], [data-theme="sky"] {
+    --bg: #fff; --card: #fff; --line: #c5ccc1;
+    --fg: #20271d; --muted: #485342; --accent: #365c20;
+    --red: #9b3026; --yellow: #705607; --blue: #185780;
+    --magenta: #823169; --cyan: #09655b;
+  }
+
+  html { scroll-behavior: auto; }
+  body { font-size: 9pt; line-height: 1.35; transition: none; }
+  .site { max-width: none; border: 0; }
+  .nav { display: block; height: auto; padding: 0 0 6pt; }
+  .brand { font-size: 10pt; }
+  .nav-links, .theme-toggle, #copy-email { display: none; }
+  a { overflow-wrap: anywhere; }
+
+  .hero { grid-template-columns: minmax(0,1fr) 125pt; break-inside: avoid; }
+  .hero-copy { padding: 12pt 14pt 12pt 0; gap: 9pt; }
+  h1 { font-size: 29pt; }
+  .eyebrow { font-size: 7pt; }
+  .lede { max-width: none; font-size: 9pt; line-height: 1.45; }
+  .whoami { font-size: 7pt; }
+  .portrait { height: 125pt; min-height: 0; object-fit: contain; background: none; }
+  .hero-facts { padding: 6pt; gap: 3pt; font-size: 6.5pt; letter-spacing: 0; }
+
+  /* Heading bands leave enough room for content on narrow paper. */
+  .row { display: block; }
+  .row-label { padding: 7pt 0 5pt; border: 0; font-size: 8pt; break-after: avoid; }
+  .row-label br { display: none; }
+  .row-label .muted { margin-left: 7pt; color: var(--fg); }
+  .cards, .job, .oss-main, .oss-more, .vyttle-head, .apps, .toolkit, .contact { break-inside: avoid; }
+  .card img { height: 65pt; filter: none; }
+  .card-body { padding: 7pt; gap: 4pt; }
+  .meta { font-size: 6.5pt; letter-spacing: 0; }
+  h3 { font-size: 10pt; }
+  .card-body p, .oss-main p, .oss-item p, .vyttle-head p, .app p { font-size: 8pt; line-height: 1.4; }
+
+  .job { grid-template-columns: 58pt minmax(0,1.1fr) minmax(0,1.3fr) 88pt; gap: 8pt; padding: 7pt 0; font-size: 8pt; }
+  .job .mono { font-size: 7pt; }
+  .co { font-size: 8pt; }
+  .tag { letter-spacing: 0; }
+
+  #oss { break-before: page; }
+  .oss { grid-template-columns: minmax(0,1fr) 145pt; }
+  .oss-main { padding: 7pt 10pt 9pt 0; gap: 7pt; }
+  h2 { font-size: 16pt; }
+  .oss-title { gap: 6pt; }
+  .oss-title .mono, .chips, .links { font-size: 7pt; }
+  .chip { padding: 3pt 6pt; }
+  .ansi { padding: 6pt 8pt; gap: 4pt; font-size: 7pt; }
+  .ansi-title { font-size: 6.5pt; }
+  .oss-item { padding: 8pt; gap: 4pt; }
+  .oss-item h3 { font-size: 10pt; }
+  h3 .mono { font-size: 7pt; }
+
+  .vyttle-head { padding: 6pt 0 8pt; gap: 7pt; }
+  .vyttle-head h2 { font-size: 14pt; }
+  .vyttle-head .mono { font-size: 7pt; }
+  .vyttle-head p { min-width: 0; flex-basis: 100%; order: 1; }
+  .app { padding: 8pt; gap: 5pt; }
+  .app h3 { font-size: 10pt; }
+  .store-links { margin-top: 0; }
+  .btn { font-size: 7pt; padding: 4pt 6pt; }
+
+  .toolkit { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); }
+  .toolkit .row-label { grid-column: 1 / -1; }
+  .kit { padding: 6pt 8pt 9pt; font-size: 8pt; line-height: 1.45; }
+  .kit-title { font-size: 7pt; margin-bottom: 4pt; }
+  .contact { padding: 10pt 0 0; gap: 6pt; }
+  .email { font-size: 22pt; }
+  .contact .links { font-size: 7pt; gap: 12pt; letter-spacing: 0; }
 }
