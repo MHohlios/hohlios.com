@@ -101,7 +101,7 @@ h2 { font-family: var(--font-display); font-size: 24px; font-weight: 700; letter
 .links a:hover, .links button:hover { border-color: currentColor; opacity: 1; }
 .ansi { padding: 24px; display: flex; flex-direction: column; gap: 10px; justify-content: center; font-size: 11px; }
 .ansi-title { font-size: 10px; letter-spacing: 0.1em; }
-.oss-more { grid-column: 1 / -1; border-top: 1px solid var(--line); display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); }
+.oss-more { grid-column: 1 / -1; border-top: 1px solid var(--line); display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); }
 .oss-item { padding: 18px 24px; display: flex; flex-direction: column; gap: 5px; }
 .oss-item + .oss-item { border-left: 1px solid var(--line); }
 .oss-item h3 { font-size: 14px; }
