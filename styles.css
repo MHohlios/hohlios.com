@@ -223,7 +223,7 @@ h2 { font-family: var(--font-display); font-size: 24px; font-weight: 700; letter
 
   .hero { grid-template-columns: minmax(0,1fr) 125pt; break-inside: avoid; }
   .hero-copy { padding: 12pt 14pt 12pt 0; gap: 9pt; }
-  h1 { font-size: 29pt; }
+  h1 { font-size: 26pt; }
   .eyebrow { font-size: 7pt; }
   .lede { max-width: none; font-size: 9pt; line-height: 1.45; }
   .whoami { font-size: 7pt; }
